@@ -1,0 +1,23 @@
+.main
+ .main-group
+  .main-group__left-box
+   %h2.main-group__left-box__current-group test
+   %ul.main-group__left-box__member-list Member: tsuru
+  = link_to "#" do
+   .main-group__edit-btn Edit
+   
+ .main-massage-list
+  .main-massages
+   .main-massages__upper-info
+    %p.main-massages__upper-info__talker tsuru
+    %p.main-massages__upper-info__date 2019/12/25(Wed) 23:52:23
+   %p.main-massages__test テスト
+
+ .main-form
+  %form.new-massage#new-massage
+   .main-form__box
+    %input{placeholder: "type a message" , class: "main-form__box__text" , type: "text"}
+     %label{class: "main-form__box__image"}
+      %i.fas.fa-image
+      %input.main-form__box__file{type: "file"}
+   %input.submit-btn{type: "submit" , value: "Send"}

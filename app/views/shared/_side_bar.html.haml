@@ -12,7 +12,10 @@
       %i.fas.fa-cog
 
  .group-list
-  = link_to "#" do
+  - current_user.groups.each do |group|
    .group-lists
-    %p.group-lists__list-name キツツキ
-    %p.group-lists__message まだメッセージがありません
+    = link_to '#' do
+     %p.group-lists__list-name
+      = group.name
+     %p.group-lists__message
+      まだメッセージがありません。

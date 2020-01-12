@@ -6,4 +6,5 @@ class User < ApplicationRecord
 
   has_many :memders
   has_many :groups, through: :memders
+  has_many :messages
 end

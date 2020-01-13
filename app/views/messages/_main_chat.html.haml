@@ -14,10 +14,10 @@
    %p.main-massages__test テスト
 
  .main-form
-  %form.new-massage#new-massage
+  = form_for [@group, @message] do |f|
    .main-form__box
-    %input{placeholder: "type a message" , class: "main-form__box__text" , type: "text"}
-     %label{class: "main-form__box__image"}
+     = f.text_field :content, class: "main-form__box__text", placeholder: 'type a message'
+     = f.label :imege, class: "main-form__box__image" do
       %i.fas.fa-image
-      %input.main-form__box__file{type: "file"}
-   %input.submit-btn{type: "submit" , value: "Send"}
+      = f.file_field :image, class: "main-form__box__file"
+   = f.submit 'Send', class: "submit-btn"

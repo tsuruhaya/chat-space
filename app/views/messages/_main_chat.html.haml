@@ -7,17 +7,13 @@
    .main-group__edit-btn Edit
    
  .main-massage-list
-  .main-massages
-   .main-massages__upper-info
-    %p.main-massages__upper-info__talker tsuru
-    %p.main-massages__upper-info__date 2019/12/25(Wed) 23:52:23
-   %p.main-massages__test テスト
+  = render @messages
 
  .main-form
   = form_for [@group, @message] do |f|
+   = f.text_field :body, class: "main-form__box__text", placeholder: 'type a message'
    .main-form__box
-     = f.text_field :content, class: "main-form__box__text", placeholder: 'type a message'
-     = f.label :imege, class: "main-form__box__image" do
-      %i.fas.fa-image
-      = f.file_field :image, class: "main-form__box__file"
+    = f.label :imege, class: "main-form__box__image" do
+     %i.fas.fa-image
+     = f.file_field :image, class: "main-form__box__file"
    = f.submit 'Send', class: "submit-btn"

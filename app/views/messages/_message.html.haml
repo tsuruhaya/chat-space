@@ -1,12 +1,11 @@
-.main-massage-list
- .main-massages
+.main-massages
   .main-massages__upper-info
-   %p.main-massages__upper-info__talker
-    = message.user.name
+    %p.main-massages__upper-info__talker
+      = message.user.name
     %p.main-massages__upper-info__date
-    = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
-   %p.main-massages__test
-    - if message.body.present?
-     %p.main-massages__test
+      = message.created_at.strftime("%Y年%m月%d日 %H時%M分")
+  %p.main-massages__test
+  - if message.body.present?
+    %p.main-massages__test
       = message.body
-    = image_tag message.image.url, class: 'main-massages__image' if message.image.present?
+  = image_tag message.image.url, class: 'main-massages__image' if message.image.present?

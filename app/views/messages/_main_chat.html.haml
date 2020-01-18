@@ -11,9 +11,9 @@
 
  .main-form
   = form_for [@group, @message] do |f|
-   = f.text_field :body, class: "main-form__box__text", placeholder: 'type a message'
    .main-form__box
-    = f.label :imege, class: "main-form__box__image" do
+    = f.text_field :body, class: "main-form__box__text", placeholder: 'type a message'
+    = f.label :image, class: "main-form__box__image" do
      %i.fas.fa-image
      = f.file_field :image, class: "main-form__box__file"
    = f.submit 'Send', class: "submit-btn"

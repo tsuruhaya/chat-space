@@ -1,9 +1,14 @@
 .main
  .main-group
   .main-group__left-box
-   %h2.main-group__left-box__current-group test
-   %ul.main-group__left-box__member-list Member: tsuru
-  = link_to "#" do
+   %h2.main-group__left-box__current-group 
+    = @group.name
+   %ul.main-group__left-box__member-list
+    Member : 
+    %li.main-group__left-box__member-list__member
+    - @group.users.each do |user|
+     = user.name
+  = link_to edit_group_path(@group.id) do
    .main-group__edit-btn Edit
    
  .main-massage-list

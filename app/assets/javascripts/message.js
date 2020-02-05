@@ -1,8 +1,8 @@
 $(function(){
   function buildHTML(message){
-    if ( message.image ) {
+    var image = message.image ?`<img class= "main-massages__image" src= "${message.image}">`:"";
       var html =
-       `<div class="main-massages">
+       `<div class="main-massages" data-message-id="${message.id}">
           <div class="main-massages__upper-info">
             <p class="main-massages__upper-info__taker">
               ${message.user_name}
@@ -16,28 +16,9 @@ $(function(){
               ${message.body}
             </p>
           </p>
-          <img src=${message.image} >
+          ${image}
         </div>`
       return html;
-    } else {
-      var html =
-       `<div class="main-massages">
-          <div class="main-massages__upper-info">
-            <p class="main-massages__upper-info__taker">
-              ${message.user_name}
-            </p>
-            <p class="main-massages__upper-info__date">
-              ${message.created_at}
-            </p>
-          </div>
-          <p class="main-massages__test">
-            <p class="main-massages__test">
-              ${message.body}
-            </p>
-          </div>
-        </div>`
-      return html;
-    };
   }
 
 $('#new_message').on('submit', function(e){
@@ -62,6 +43,32 @@ $('#new_message').on('submit', function(e){
   .fail(function(){
     alert("メッセージ送信に失敗しました");
     $('.submit-btn').attr('disabled', false);
-  })
+  });
 })
+  
+  var reloadMessages = function() {
+    last_message_id = $('.main-massages:last').data("message-id");
+    $.ajax({
+      url: "api/messages",
+      type: 'GET',
+      dataType: 'json',
+      data: {id: last_message_id}
+    })
+    .done(function(messages) {
+      if (messages.length !== 0) {
+      var insertHTML = '';
+      $.each(messages, function(i, message) {
+        insertHTML += buildHTML(message)
+      });
+      $('.main-massage-list').append(insertHTML);
+      $('.main-massage-list').animate({ scrollTop: $('.main-massage-list')[0].scrollHeight});
+    } 
+    })
+    .fail(function() {
+      alert("メッセージ送信に失敗しました");
+    });
+  };
+  if (document.location.href.match(/\/groups\/\d+\/messages/)) {
+    setInterval(reloadMessages, 7000);
+  };
 });
